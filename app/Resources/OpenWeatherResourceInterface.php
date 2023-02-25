@@ -6,5 +6,5 @@ use Illuminate\Http\Request;
 
 interface OpenWeatherResourceInterface
 {
-    public function getOpenWeather(Request $request);
+    public function getOpenWeather($lat, $lon);
 }

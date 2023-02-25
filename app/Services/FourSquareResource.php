@@ -11,20 +11,23 @@ class FourSquareResource implements FourSquareResourceInterface
 {
     public function getFourSquare(Request $request)
     {
+        $latlon = $request->lat . ',' . $request->lon;
 
-
-        $params = [
-            'query' => 'Tokyo'
-        ];
-        
-        $client = new Client(['verify' => false]);
-        $response = $client->request('GET', env('FOURSQUARE_URL'), [
+        $contents = [
             'headers' => [
                 'Authorization' => env('FOURSQUARE_API_KEY'),
                 'Accept' => 'application/json',
             ],
-            $params
-        ]);
+            'form_params' => [
+                'll' => $latlon
+            ]
+        ];
+
+        $client = new Client(['verify' => false]);
+
+        $response = $client->request('GET', env('FOURSQUARE_URL'), 
+            $contents
+        );
 
         return json_decode( $response->getBody() );
     }

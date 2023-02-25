@@ -17,6 +17,8 @@ class OpenWeatherController extends Controller
 
     public function index(Request $request)
     {
-        return $this->_openWeather->getOpenWeather($request);
+        $lat = $request->lat;
+        $lon = $request->lon;
+        return $this->_openWeather->getOpenWeather($lat, $lon);
     }
 }

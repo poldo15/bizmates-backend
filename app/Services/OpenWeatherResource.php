@@ -9,18 +9,21 @@ use Illuminate\Support\Facades\Http;
 
 class OpenWeatherResource implements OpenWeatherResourceInterface
 {
-    public function getOpenWeather(Request $request)
+    public function getOpenWeather($lat, $lon)
     {
         $params = [
             'query' => [
-                'lat' => '35.6762',
-                'lon' => '139.6503',
+                'lat' => $lat,
+                'lon' => $lon,
                 'appid' => env('OPEN_WEATHER_API_KEY')
             ]
         ];
 
         $client = new Client();
-        $response = $client->request('GET', env('OPEN_WEATHER_URL'), $params);
+
+        $response = $client->request('GET', env('OPEN_WEATHER_URL'), 
+            $params
+        );
 
         return json_decode( $response->getBody() );
     }

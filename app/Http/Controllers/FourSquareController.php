@@ -17,6 +17,8 @@ class FourSquareController extends Controller
 
     public function index(Request $request)
     {
-        return $this->_fourSquare->getFourSquare($request);
+        $lat = $request->lat;
+        $lon = $request->lon;
+        return $this->_fourSquare->getFourSquare($lat, $lon);
     }
 }

@@ -19,6 +19,7 @@ class FourSquareController extends Controller
     {
         $lat = $request->lat;
         $lon = $request->lon;
-        return $this->_fourSquare->getFourSquare($lat, $lon);
+        $keyword = $request->keyword;
+        return $this->_fourSquare->getFourSquare($lat, $lon, $keyword);
     }
 }

@@ -9,9 +9,10 @@ use Illuminate\Support\Facades\Http;
 
 class FourSquareResource implements FourSquareResourceInterface
 {
-    public function getFourSquare(Request $request)
+    public function getFourSquare($lat, $lon, $keyword)
     {
-        $latlon = $request->lat . ',' . $request->lon;
+        $latlon = $lat . ',' . $lon;
+        // dd($keyword);
 
         $contents = [
             'headers' => [
@@ -19,7 +20,8 @@ class FourSquareResource implements FourSquareResourceInterface
                 'Accept' => 'application/json',
             ],
             'form_params' => [
-                'll' => $latlon
+                'll' => $latlon,
+                'query' => $keyword
             ]
         ];
 
